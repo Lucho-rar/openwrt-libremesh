@@ -1,20 +1,20 @@
-# RUN OPENWRT & LIBREMESH STEP BY STEP
+# Run OpenWRT & LibreMesh Step by Step
 
-In this case, im following steps on [Libremesh - Development](https://libremesh.org/development.html).  
+In this case, I'm following steps on [LibreMesh - Development](https://libremesh.org/development.html).
 
-### Download & Compile OpenWrt source code
+### Download & Compile OpenWrt Source Code
 
-```
+```bash
 git clone -b v19.07.10 --single-branch https://git.openwrt.org/openwrt/openwrt.git
 ```
 or
-```
+```bash
 git clone --depth <last_commit_merged> https://github.com/openwrt/openwrt.git
 ```
 
 Now add libremesh package in the feeds.conf.default file
 
-```
+```bash
 # feeds.conf.default
 
 src-git packages https://git.openwrt.org/feed/packages.git
@@ -39,14 +39,14 @@ In my case, put the 2024.1 version.
 
 ### Run scripts
 
-```
+```bash
 scripts/feeds update -a
 scripts/feeds install -a
 ```
 
 ### Select & Deselect options in the configuration menu
 
-```
+```bash
 make menuconfig
 ```
 <p align="center">
@@ -82,13 +82,20 @@ Check optionals selects/deselects in the page.
 
 
 ### Create config-profile file
-```
+```bash
 mkdir -p files/etc/config/
 touch files/etc/config/lime-community
 ```
 
 ### Compile the images
-```
+```bash
 make -j$(nproc) #or specify quantity
 ```
+
+in my case, i to do nedeed run as (this flag its recommended in the make compilation)
+
+```bash
+FORCE_UNSAFE_CONFIGURE=1 make -j$(nproc)
+```
+
 
